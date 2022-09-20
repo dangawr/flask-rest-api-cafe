@@ -25,7 +25,13 @@ class Cafe(db.Model):
     def to_dict(self):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
-db.create_all()
+
+@app.route("/random")
+def get_random_cafe():
+    cafes = db.session.query(Cafe).all()
+    random_cafe = random.choice(cafes)
+    return jsonify(cafe=random_cafe.to_dict())
+
 
 if __name__ == '__main__':
     app.run(debug=True)
