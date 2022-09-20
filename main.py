@@ -25,6 +25,7 @@ class Cafe(db.Model):
     def to_dict(self):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
+db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True)
